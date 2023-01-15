@@ -241,7 +241,7 @@ defmodule Ueberauth.Strategy.Github do
   defp fetch_user(conn, token) do
     conn = put_private(conn, :github_token, token)
     # Will be better with Elixir 1.3 with/else
-    case Ueberauth.Strategy.Github.OAuth.get(token, "/user") do
+    case Ueberauth.Strategy.Github.OAuth.get(token, "/user", [{"User-Agent", "Ueberauth-Github"}]) do
       {:ok, %OAuth2.Response{status_code: 401, body: _body}} ->
         set_errors!(conn, [error("token", "unauthorized")])
 
