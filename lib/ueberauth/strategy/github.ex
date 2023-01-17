@@ -222,8 +222,7 @@ defmodule Ueberauth.Strategy.Github do
   defp fetch_email!(user, allow_private_emails) do
     user["email"] ||
       get_primary_email!(user) ||
-      get_private_email!(user, allow_private_emails) ||
-      raise "Unable to access the user's email address"
+      get_private_email!(user, allow_private_emails)
   end
 
   defp get_primary_email!(user) do
